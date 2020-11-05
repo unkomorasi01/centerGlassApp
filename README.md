@@ -6,6 +6,7 @@ Create a Windows application with a transparent center.
 - TypeScript
     - ESLint
     - Prettier
+    - Webpack
 - React
 - Electron
 

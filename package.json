@@ -4,7 +4,9 @@
   "description": "Create a Windows application with a transparent center.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ./dist/main.js",
+    "build:main": "tsc",
+    "build:render": "webpack"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,7 @@
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
     "electron": "^10.1.5",
+    "electron-builder": "^22.9.1",
     "eslint": "^7.12.1",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.15.0",

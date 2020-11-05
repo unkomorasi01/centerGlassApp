@@ -9,6 +9,8 @@ const createWindow = (): void => {
   const win = new BrowserWindow({
     width: 1200,
     height: 600,
+    frame: false,       // フレームを非表示にする
+    resizable: false,    // ウィンドウリサイズ禁止
     webPreferences: {
       nodeIntegration: false,
       nodeIntegrationInWorker: false,
@@ -21,7 +23,7 @@ const createWindow = (): void => {
   win.loadFile('./index.html');
 
   // 開発者ツールを起動する
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 };
 
 // Electronの起動準備が終わったら、ウィンドウを作成する。

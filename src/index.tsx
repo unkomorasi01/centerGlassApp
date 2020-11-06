@@ -3,4 +3,4 @@ import ReactDOM from 'react-dom';
 
 const container = document.getElementById('contents');
 
-ReactDOM.render(<p>こんにちは、世界</p>, container);
+ReactDOM.render(<img src="../img/partygopher.gif"/>, container);

@@ -7,16 +7,20 @@ import path from 'path';
 const createWindow = (): void => {
   // レンダープロセスとなる、ウィンドウオブジェクトを作成する。
   const win = new BrowserWindow({
-    width: 1200,
-    height: 600,
+    width: 200,
+    height: 200,
+    transparent: true,
     frame: false,       // フレームを非表示にする
     resizable: false,    // ウィンドウリサイズ禁止
+    alwaysOnTop: true,
     webPreferences: {
       nodeIntegration: false,
       nodeIntegrationInWorker: false,
       contextIsolation: true,
     },
   });
+  win.setPosition(1750, 900);
+  win.setIgnoreMouseEvents(true);
 
   // 読み込む index.html。
   // tsc でコンパイルするので、出力先の dist の相対パスで指定する。

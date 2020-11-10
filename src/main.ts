@@ -7,8 +7,9 @@ import path from 'path';
 const createWindow = (): void => {
   // レンダープロセスとなる、ウィンドウオブジェクトを作成する。
   const win = new BrowserWindow({
-    width: 1200,
-    height: 600,
+    width: 900,
+    height: 900,
+    transparent: true,
     frame: false,       // フレームを非表示にする
     resizable: false,    // ウィンドウリサイズ禁止
     webPreferences: {

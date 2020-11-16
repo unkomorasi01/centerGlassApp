@@ -3,40 +3,37 @@ import ReactDOM from 'react-dom';
 
 // const container = document.getElementById('contents');
 // ReactDOM.render(<p>こんにちは、世界</p>, container);
-interface Container {
-  fontFamily: string,
-  fontSize: number,
-  background: string,
-}
-interface AllObj {
-  container: Container,
-}
 
 /**
  * スタートボタン
  */
 class StartButton extends React.Component {
-  styles(): AllObj {
-    const container: Container = {
-      fontFamily: 'helvetica, arial, "hiragino kaku gothic pro", meiryo, "ms pgothic", sans-serif',
-      fontSize: 11,
-      background: '#ff00ff',
-    };
-    return ({container});
+  state = {
+    background: '',
+  };
+  leave=()=>{
+    this.setState({
+      background:'#00ff00'
+    });
   }
-  /*
-  onMouseLeave() {
-        this.setState({hovered: false});
-    }
-    onMouseEnter() {
-        this.setState({hovered: false});
-    }
-  */
+  enter=()=>{
+    this.setState({
+      background:'#00ffff'
+    });
+  }
+  onClickEvent=()=>{
+    console.log('The link was clicked.');
+  }
+
   render(){
     return (
-      <span style={this.styles().container}>start</span>
-      // onMouseEnter={::this.onMouseEnter}
-      // onMouseLeave={::this.onMouseLeave}>いいね！</span>
+      <span
+        className='button'
+        onMouseEnter={this.enter}
+        onMouseLeave={this.leave}
+        onClick={this.onClickEvent}
+        style={this.state}
+      >start</span>
     );
   }
 }

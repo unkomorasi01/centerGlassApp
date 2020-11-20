@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ChildProcess from 'child_process';
 import fs from 'fs';
+import {ipcRenderer} from 'electron';
+// const BrowserWindow = require('electron').remote.BrowserWindow
 
 // const container = document.getElementById('contents');
 // ReactDOM.render(<p>こんにちは、世界</p>, container);
 /**
  * スタートボタン情報クラス
+ * @return {void}
  */
 class StartButton extends React.Component {
   state = {
@@ -26,18 +29,19 @@ class StartButton extends React.Component {
   getWindowPosition = () => {
     try {
       const position = JSON.parse(
-        fs.readFileSync('./dist/bounds.json', 'utf8')
+          fs.readFileSync('./dist/bounds.json', 'utf8'),
       );
       return position;
     } catch (e) {
-      console.log(e)
+      console.log(e);
       return null;
     }
   }
 
   // 透明部分の左角の座標取得
   getCorner = () => {
-    const coordinates = document.getElementById('corner')!.getBoundingClientRect();
+    const coordinates 
+        = document.getElementById('corner')!.getBoundingClientRect();
     return ({
       x: coordinates.x,
       y: coordinates.y + 10,
@@ -48,6 +52,8 @@ class StartButton extends React.Component {
     const position = this.getCorner();
     console.log(position);
     console.log(this.getWindowPosition());
+    // ウィンドウ操作
+    ipcRenderer.sendSync('push-start', 'data');
     // python を呼び出す
     const command = 'python ./src/python/hello.py';
     ChildProcess.exec(command, (error:any, stdout:any, stderr:any)=>{

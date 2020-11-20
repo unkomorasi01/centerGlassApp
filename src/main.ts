@@ -1,5 +1,5 @@
-import { app, BrowserWindow } from 'electron';
-// import path from 'path';
+import {app, BrowserWindow} from 'electron';
+import fs from 'fs';
 
 // セキュアな Electron の構成
 // 参考: https://qiita.com/pochman/items/64b34e9827866664d436
@@ -10,17 +10,20 @@ const createWindow = (): void => {
     width: 900,
     height: 900,
     transparent: true,
-    frame: false,       // フレームを非表示にする
-    resizable: false,    // ウィンドウリサイズ禁止
+    frame: false,
+    resizable: false,
     webPreferences: {
       // ローカルで完結するためtrueにする
       nodeIntegration: true,
     },
   });
-
   // 読み込む index.html。
   // tsc でコンパイルするので、出力先の dist の相対パスで指定する。
   win.loadFile('./index.html');
+
+  fs.writeFileSync(
+    './dist/bounds.json', JSON.stringify(win.getPosition())
+  );
 
   // 開発者ツールを起動する
   win.webContents.openDevTools();

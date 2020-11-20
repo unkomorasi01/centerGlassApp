@@ -33,13 +33,22 @@ body{
   position: absolute;
 }
 .button{
-    background: #ff00ff;
-    width: 100px;
-    height: 60px;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    position: absolute;
+  background: #ff00ff;
+  width: 100px;
+  height: 60px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+}
+#corner{
+  width: 10px;
+  height: 10px;
+  left: 250px;
+  bottom: 0px;
+  margin: 0;
+  background-color: aqua;
+  position: absolute;
 }

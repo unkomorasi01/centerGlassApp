@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ChildProcess from 'child_process';
+import fs from 'fs';
 
 // const container = document.getElementById('contents');
 // ReactDOM.render(<p>こんにちは、世界</p>, container);
@@ -21,7 +22,32 @@ class StartButton extends React.Component {
       background: '#00ffff',
     });
   }
+
+  getWindowPosition = () => {
+    try {
+      const position = JSON.parse(
+        fs.readFileSync('./dist/bounds.json', 'utf8')
+      );
+      return position;
+    } catch (e) {
+      console.log(e)
+      return null;
+    }
+  }
+
+  // 透明部分の左角の座標取得
+  getCorner = () => {
+    const coordinates = document.getElementById('corner')!.getBoundingClientRect();
+    return ({
+      x: coordinates.x,
+      y: coordinates.y + 10,
+    });
+  }
+
   onClickEvent=()=>{
+    const position = this.getCorner();
+    console.log(position);
+    console.log(this.getWindowPosition());
     // python を呼び出す
     const command = 'python ./src/python/hello.py';
     ChildProcess.exec(command, (error:any, stdout:any, stderr:any)=>{

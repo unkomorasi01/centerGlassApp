@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import ChildProcess from 'child_process';
 import fs from 'fs';
 import {ipcRenderer} from 'electron';
-// const BrowserWindow = require('electron').remote.BrowserWindow
 
 // const container = document.getElementById('contents');
 // ReactDOM.render(<p>こんにちは、世界</p>, container);
+/* eslint-disable no-invalid-this */
 /**
  * スタートボタン情報クラス
  * @return {void}
@@ -15,40 +15,41 @@ class StartButton extends React.Component {
   state = {
     background: '',
   };
-  leave=()=>{
+  leave = () => {
     this.setState({
       background: '#00ff00',
     });
-  }
-  enter=()=>{
+  };
+  enter = () => {
     this.setState({
       background: '#00ffff',
     });
-  }
+  };
 
   getWindowPosition = () => {
     try {
       const position = JSON.parse(
-          fs.readFileSync('./dist/bounds.json', 'utf8'),
+        fs.readFileSync('./dist/bounds.json', 'utf8'),
       );
       return position;
     } catch (e) {
       console.log(e);
       return null;
     }
-  }
+  };
 
   // 透明部分の左角の座標取得
   getCorner = () => {
-    const coordinates 
-        = document.getElementById('corner')!.getBoundingClientRect();
-    return ({
+    const coordinates = document
+      .getElementById('corner')!
+      .getBoundingClientRect();
+    return {
       x: coordinates.x,
       y: coordinates.y + 10,
-    });
-  }
+    };
+  };
 
-  onClickEvent=()=>{
+  onClickEvent = () => {
     const position = this.getCorner();
     console.log(position);
     console.log(this.getWindowPosition());
@@ -56,14 +57,14 @@ class StartButton extends React.Component {
     ipcRenderer.sendSync('push-start', 'data');
     // python を呼び出す
     const command = 'python ./src/python/hello.py';
-    ChildProcess.exec(command, (error:any, stdout:any, stderr:any)=>{
+    ChildProcess.exec(command, (error, stdout, stderr) => {
       if (error != null) {
         console.log(error);
       } else {
         console.log(stdout);
       }
     });
-  }
+  };
 
   /**
    * レンダー
@@ -72,17 +73,15 @@ class StartButton extends React.Component {
   render() {
     return (
       <span
-        className='button'
+        className="button"
         onMouseEnter={this.enter}
         onMouseLeave={this.leave}
         onClick={this.onClickEvent}
-        style={this.state}
-      >start</span>
+        style={this.state}>
+        start
+      </span>
     );
   }
 }
 
-ReactDOM.render(
-    <StartButton />,
-    document.getElementById('startButton'),
-);
+ReactDOM.render(<StartButton />, document.getElementById('startButton'));

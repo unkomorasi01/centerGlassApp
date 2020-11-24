@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ChildProcess from 'child_process';
 import fs from 'fs';
-import {ipcRenderer} from 'electron';
+import { ipcRenderer } from 'electron';
 
 // const container = document.getElementById('contents');
 // ReactDOM.render(<p>こんにちは、世界</p>, container);
